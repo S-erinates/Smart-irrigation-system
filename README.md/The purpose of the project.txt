@@ -1,8 +1,47 @@
-# Smart Irrigation System (Smart Agriculture Prototype)
+# Smart Irrigation System Project
 
-This project is an automation system that enables automatic watering of plants using a soil moisture sensor and a DHT11 sensor.
+This project was developed as a collaborative team effort by Yakup Taha Işık, Huzeyfe Halil Kaya, and myself.
 
-**How It Works:**
-- When the data from the soil moisture sensor rises above the specified threshold (460) (meaning the soil is dry), the water pump starts automatically.
-- When the value drops below the lower threshold (320) (meaning the soil is saturated), the pump stops.
-- Ambient temperature, humidity, soil moisture status, and the pump's operating status are displayed simultaneously on a 20x4 I2C LCD screen and the Serial Monitor.
+**Project Purpose and Use Case:**
+The main purpose of the project is to instantly analyze the water needs of plants based on the soil moisture level and water them autonomously. The system is designed to prevent plants from drying out when you are away from home or the garden for a long time due to business trips, vacations, or daily busy schedules.
+
+**Moisture Limits and Operation:**
+
+* **Watering Start Limit (Dry Soil):** When the sensor reading goes **above 460**, the system detects that the soil is dry and automatically starts the water pump.
+* **Watering Stop Limit (Wet/Saturated Soil):** Once the soil absorbs enough water and the sensor reading drops **below 320**, the system detects saturation and automatically stops the pump.
+This provides a fully autonomous and reliable plant care system without the need for any human intervention, even when you are away.
+
+**Step-by-Step Circuit Construction:**
+
+To build the circuit, make the connections as follows, adhering to the pin definitions in the code:
+
+1. **Soil Moisture Sensor Connection:**
+* Connect the `VCC` pin on the sensor's control board to the Arduino's `5V` pin.
+* Connect the `GND` pin to the Arduino's `GND` pin.
+* Connect the `A0` (Analog output) pin to the Arduino's `A0` pin.
+
+
+2. **DHT11 Temperature and Humidity Sensor Connection:**
+* Connect the sensor's `VCC` pin to the Arduino's `5V` pin.
+* Connect the `GND` pin to the Arduino's `GND` pin.
+* Connect the `DATA` (or Signal) pin to the Arduino's digital pin `2`.
+
+
+3. **20x4 I2C LCD Display Connection:**
+* Connect the `GND` pin of the I2C module on the back of the screen to the Arduino's `GND` pin.
+* Connect the `VCC` pin to the Arduino's `5V` pin.
+* Connect the `SDA` pin to the Arduino's `A4` pin (or dedicated SDA pin).
+* Connect the `SCL` pin to the Arduino's `A5` pin (or dedicated SCL pin).
+
+
+4. **Water Pump and Relay Connection:**
+*(Since the pump draws high current, it must be connected via a 5V Relay module, not directly to the Arduino.)*
+* Connect the relay module's `VCC` pin to `5V`, and the `GND` pin to `GND`.
+* Connect the relay's Signal (`IN`) pin to the Arduino's digital pin `5`.
+* Connect the negative (-) terminal of the external power supply (e.g., battery holder) directly to the pump's negative wire.
+* Connect the positive (+) terminal of the power supply to the relay's `COM` terminal, and the pump's positive wire to the relay's `NO` (Normally Open) terminal.
+
+
+5. **Power and Grounding Check:**
+* Ensure that the `GND` lines of all hardware components in the circuit (relay, sensors, display) are connected to the `GND` on the Arduino (common ground).
+* After verifying the connections, you can supply power and run your code.
