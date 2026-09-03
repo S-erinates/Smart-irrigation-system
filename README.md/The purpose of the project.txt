@@ -1,0 +1,8 @@
+# Smart Irrigation System (Smart Agriculture Prototype)
+
+This project is an automation system that enables automatic watering of plants using a soil moisture sensor and a DHT11 sensor.
+
+**How It Works:**
+- When the data from the soil moisture sensor rises above the specified threshold (460) (meaning the soil is dry), the water pump starts automatically.
+- When the value drops below the lower threshold (320) (meaning the soil is saturated), the pump stops.
+- Ambient temperature, humidity, soil moisture status, and the pump's operating status are displayed simultaneously on a 20x4 I2C LCD screen and the Serial Monitor.
